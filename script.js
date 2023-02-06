@@ -61,22 +61,55 @@ function getWinner(moveA, moveB) {
 
 /**
  * Check who is the winner and logs a message with the result
+ * @param {number} round the round number
  * @param {string} playerSelection player's move
  * @param {string} computerSelection computer's move
+ * @returns {number} the result of the round: 1 if Player won, 0 if Computer won, -1 if tie
  */
-function playRound(playerSelection, computerSelection) {
+function playRound(round, playerSelection, computerSelection) {
     const winner = getWinner(playerSelection, computerSelection);
     if (winner === 1) {
-        console.log(`Computer used ${computerSelection}... You won!`)
+        console.log(`#${round} Computer used ${computerSelection}... You won!`);
     }
     else if (winner === 0) {
-        console.log(`Computer used ${computerSelection}... You lose!`)
+        console.log(`#${round} Computer used ${computerSelection}... You lose!`);
     }
     else {
-        console.log("It's a tie!")
+        console.log(`#${round} It's a tie!`);
     }
+    return winner;
 }
 
-playerSelection = getPlayerChoice();
-computerSelection = getComputerChoice();
-playRound(playerSelection, computerSelection);
+/**
+ * Game loop
+ */
+function game() {
+    const maxRounds = 5;
+
+    let wins = 0;
+    let losses = 0;
+    let ties = 0;
+
+    for (let i = 0; i < maxRounds; i++) {
+        playerSelection = getPlayerChoice();
+        computerSelection = getComputerChoice();
+
+        const result = playRound(i+1, playerSelection, computerSelection);
+
+        if (result == 1) wins++;
+        else if (result == 0) losses++;
+        else ties++;
+    }
+
+    if (wins > losses) {
+        console.log("You won the game!");
+    } else if (wins < losses) {
+        console.log("You lost the game!");
+    } else {
+        console.log("The game was a tie!");
+    }
+    console.log(`${ties} ties\tYou: ${wins} wins\tComputer: ${losses} wins`);
+}
+
+game();
+
