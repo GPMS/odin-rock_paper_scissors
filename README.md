@@ -6,7 +6,8 @@ from the Java Script section of the Foundations course of [The Odin Project](htt
 In this project we have to recreate the classic game of [Rock Paper Scissors](https://en.wikipedia.org/wiki/Rock_paper_scissors) in the Browser's Developer Console using JavaScript.
 
 ## How to play?
-Open the console with the command ```CTRL + Shift + I``` or ```F12``` on Firefox, or ```CTRL + Shift + J``` on Chrome, and follow the instructions.
+Open the console with the command `CTRL + Shift + I` or `F12` on Firefox, or `CTRL + Shift + J` on Chrome, and follow the instructions.
 
 ## Skills Used
- - JavaScript Basics
+ - JavaScript Basics.
+ - Code documentation in the style of JSDoc.
