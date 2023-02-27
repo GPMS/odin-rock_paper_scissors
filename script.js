@@ -1,3 +1,10 @@
+const messages = document.querySelector("#messages");
+const winsText = document.querySelector("#wins");
+const lossesText = document.querySelector("#losses");
+const resultText = document.querySelector("#result");
+const roundsText = document.querySelector("#rounds");
+const buttons = document.querySelectorAll("button")
+
 /**
  * Valid moves
  * @type {Array.<string>}
@@ -8,29 +15,9 @@ const MOVES = [ "rock", "paper", "scissors" ];
  * Generates a random move
  * @returns {string} the random move
  */
-function getComputerChoice() {
+function getComputerSelection() {
     const randomMove = Math.floor(Math.random() * 3);
     return MOVES[randomMove];
-}
-
-/**
- * Prompts the player for a valid move
- * @returns {string} the player move
- */
-function getPlayerChoice() {
-    let isValidMove = false;
-    while (!isValidMove) {
-        playerSelection = prompt("What's your move?", "rock");
-        if (playerSelection) {
-            playerSelection = playerSelection.toLowerCase();
-            if (MOVES.includes(playerSelection))
-                isValidMove = true;
-        }
-        if (!isValidMove) {
-            console.log("Invalid move, choose again...");
-        }
-    }
-    return playerSelection;
 }
 
 /**
@@ -55,61 +42,86 @@ function getWinner(moveA, moveB) {
         return 1;
     if (moveA === "rock" && moveB === "paper")
         return 0;
+    // Tie
     if (moveA === moveB)
         return -1;
 }
 
+const MAX_ROUNDS = 5;
+let round = 0;
+let wins = 0;
+let losses = 0;
+
 /**
- * Check who is the winner and logs a message with the result
- * @param {number} round the round number
+ * Append given message to the log
+ * @param {string} message the message to log
+ */
+function logMessage(message) {
+    let tag = document.createElement("p");
+    tag.textContent = message;
+    messages.appendChild(tag);
+}
+
+/**
+ * Update the display at the top with the correct number of wins/losses/rounds
+ */
+function updateDisplay() {
+    winsText.textContent = wins;
+    lossesText.textContent = losses;
+    roundsText.textContent = `${round}/${MAX_ROUNDS}`;
+}
+
+/**
+ * Display results and end the game
+ */
+function gameOver() {
+    // Display result
+    if (wins == losses) {
+        resultText.textContent = "It's a tie!";
+    } else if (wins > losses) {
+        resultText.textContent = "You won!";
+    } else {
+        resultText.textContent = "You lose!";
+    }
+    // Prevent player from continuing to play
+    buttons.forEach(button => {
+        button.disabled = true;
+    })
+}
+
+/**
+ * Game logic
  * @param {string} playerSelection player's move
  * @param {string} computerSelection computer's move
- * @returns {number} the result of the round: 1 if Player won, 0 if Computer won, -1 if tie
  */
-function playRound(round, playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
+    round++;
     const winner = getWinner(playerSelection, computerSelection);
     if (winner === 1) {
-        console.log(`#${round} Computer used ${computerSelection}... You won!`);
+        logMessage(`#${round} Computer used ${computerSelection}... You won!`);
+        wins++;
     }
     else if (winner === 0) {
-        console.log(`#${round} Computer used ${computerSelection}... You lose!`);
+        logMessage(`#${round} Computer used ${computerSelection}... You lose!`);
+        losses++;
     }
     else {
-        console.log(`#${round} It's a tie!`);
+        logMessage(`#${round} It's a tie!`);
     }
-    return winner;
+    updateDisplay();
+
+    if (round == MAX_ROUNDS) {
+        gameOver();
+    }
 }
 
-/**
- * Game loop
- */
-function game() {
-    const maxRounds = 5;
+buttons.forEach(button => {
+    button.addEventListener("click", e => {
+        const playerSelection = e.target.id;
+        const computerSelection = getComputerSelection();
+        playRound(playerSelection, computerSelection);
+    })
+});
 
-    let wins = 0;
-    let losses = 0;
-    let ties = 0;
-
-    for (let i = 0; i < maxRounds; i++) {
-        playerSelection = getPlayerChoice();
-        computerSelection = getComputerChoice();
-
-        const result = playRound(i+1, playerSelection, computerSelection);
-
-        if (result == 1) wins++;
-        else if (result == 0) losses++;
-        else ties++;
-    }
-
-    if (wins > losses) {
-        console.log("You won the game!");
-    } else if (wins < losses) {
-        console.log("You lost the game!");
-    } else {
-        console.log("The game was a tie!");
-    }
-    console.log(`${ties} ties\tYou: ${wins} wins\tComputer: ${losses} wins`);
-}
-
-game();
-
+// Set up display for the first round
+updateDisplay();
