@@ -15,8 +15,8 @@ const MOVES = ["rock", "paper", "scissors"];
  * @returns {string} the random move
  */
 function getComputerSelection() {
-  const randomMove = Math.floor(Math.random() * 3);
-  return MOVES[randomMove];
+  const randomIndex = Math.floor(Math.random() * 3);
+  return MOVES[randomIndex];
 }
 
 /**
@@ -25,18 +25,21 @@ function getComputerSelection() {
  * @param {string} moveB player B move
  * @returns {number} 1 if A wins, 0 if B wins, -1 if tie
  */
-function getWinner(moveA, moveB) {
-  // Rock win
-  if (moveA === "rock" && moveB === "scissors") return 1;
-  if (moveA === "scissors" && moveB === "rock") return 0;
-  // Scissors win
-  if (moveA === "scissors" && moveB === "paper") return 1;
-  if (moveA === "paper" && moveB === "scissors") return 0;
-  // Paper win
-  if (moveA === "paper" && moveB === "rock") return 1;
-  if (moveA === "rock" && moveB === "paper") return 0;
-  // Tie
-  if (moveA === moveB) return -1;
+function checkWinner(moveA, moveB) {
+  if (moveA === moveB) {
+    // Tie
+    return -1;
+  } else if (
+    (moveA === "rock" && moveB === "scissors") ||
+    (moveA === "scissors" && moveB === "paper") ||
+    (moveA === "paper" && moveB === "rock")
+  ) {
+    // A wins
+    return 1;
+  } else {
+    // B wins
+    return 0;
+  }
 }
 
 const MAX_SCORE = 5;
@@ -48,21 +51,13 @@ let losses = 0;
  * Append given message to the log
  * @param {string} message the message to log
  */
-function logMessage(message) {
+function logMessage(round, message) {
   let tag = document.createElement("p");
-  tag.innerHTML = message;
+  tag.innerHTML = `<strong>Round ${round}:</strong> ${message}`;
   messages.appendChild(tag);
 
   // Keep the latest message always visible by scrolling to the bottom
   messages.scrollTop = messages.scrollHeight;
-}
-
-/**
- * Update the display at the top with the correct number of wins/losses
- */
-function updateDisplay() {
-  winsText.textContent = wins;
-  lossesText.textContent = losses;
 }
 
 /**
@@ -92,21 +87,26 @@ function gameOver() {
  */
 function playRound(playerSelection, computerSelection) {
   round++;
-  const winner = getWinner(playerSelection, computerSelection);
+  const winner = checkWinner(playerSelection, computerSelection);
   if (winner === 1) {
     logMessage(
-      `<strong>#${round}</strong> Computer used ${computerSelection}... You won!`
+      round,
+      `You won, ${playerSelection} beats ${computerSelection}.`
     );
     wins++;
   } else if (winner === 0) {
     logMessage(
-      `<strong>#${round}</strong> Computer used ${computerSelection}... You lose!`
+      round,
+      `You lost, ${computerSelection} beats ${playerSelection}.`
     );
     losses++;
   } else {
-    logMessage(`<strong>#${round}</strong> It's a tie!`);
+    logMessage(round, `It's a tie, both are ${playerSelection}.`);
   }
-  updateDisplay();
+
+  // Update display
+  winsText.textContent = wins;
+  lossesText.textContent = losses;
 
   if (wins == MAX_SCORE || losses == MAX_SCORE) {
     gameOver();
@@ -120,6 +120,3 @@ buttons.forEach((button) => {
     playRound(playerSelection, computerSelection);
   });
 });
-
-// Set up display for the first round
-updateDisplay();

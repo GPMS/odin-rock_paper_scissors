@@ -7,7 +7,7 @@
     <!-- script needs defer to load after the body, otherwise we can't access
   the elements created in it. One other option is moving the script to the
   end of the body-->
-    <script defer src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
     <title>Rock Paper Scissors</title>
   </head>
@@ -21,11 +21,11 @@
       <div class="vertical-columns">
         <div>
           <h2>Wins</h2>
-          <p id="wins"></p>
+          <p id="wins">0</p>
         </div>
         <div>
           <h2>Losses</h2>
-          <p id="losses"></p>
+          <p id="losses">0</p>
         </div>
       </div>
 
