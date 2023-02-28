@@ -8,5 +8,6 @@ In this project we have to recreate the classic game of [Rock Paper Scissors](ht
 
 ## Skills Learned
  - JavaScript Basics.
- - Code documentation in the style of JSDoc.
  - DOM manipulation.
+ - Code documentation in the style of JSDoc.
+ - CSS animations and transitions
