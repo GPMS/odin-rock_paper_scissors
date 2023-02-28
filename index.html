@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- script needs defer to load after the body, otherwise we can't access
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- script needs defer to load after the body, otherwise we can't access
   the elements created in it. One other option is moving the script to the
   end of the body-->
-  <script defer src="script.js"></script>
-  <link rel="stylesheet" href="style.css">
-  <title>Rock Paper Scissors</title>
-</head>
-<body>
-  <header>
-    <h1>Rock Paper Scissors</h1>
-  </header>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <header>
+      <h1>Rock Paper Scissors</h1>
+    </header>
 
-  <main>
-    <h2 id="result" class="result"></h2>
-    <div class="vertical-columns">
-      <div>
-        <h2>Wins</h2>
-        <p id="wins"></p>
+    <main>
+      <h2 id="result" class="result"></h2>
+      <div class="vertical-columns">
+        <div>
+          <h2>Wins</h2>
+          <p id="wins"></p>
+        </div>
+        <div>
+          <h2>Losses</h2>
+          <p id="losses"></p>
+        </div>
       </div>
-      <div>
-        <h2>Losses</h2>
-        <p id="losses"></p>
+
+      <div class="buttons">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
       </div>
-    </div>
 
-    <div class="buttons">
-      <button id="rock">Rock</button>
-      <button id="paper">Paper</button>
-      <button id="scissors">Scissors</button>
-    </div>
-
-    <h2>Messages</h2>
-    <div id="messages" class="messages"></div>
-  </main>
-</body>
+      <h2>Messages</h2>
+      <div id="messages" class="messages"></div>
+    </main>
+  </body>
 </html>
