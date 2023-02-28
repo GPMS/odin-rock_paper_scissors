@@ -2,7 +2,6 @@ const messages = document.querySelector("#messages");
 const winsText = document.querySelector("#wins");
 const lossesText = document.querySelector("#losses");
 const resultText = document.querySelector("#result");
-const roundsText = document.querySelector("#rounds");
 const buttons = document.querySelectorAll("button")
 
 /**
@@ -47,7 +46,7 @@ function getWinner(moveA, moveB) {
         return -1;
 }
 
-const MAX_ROUNDS = 5;
+const MAX_SCORE = 5;
 let round = 0;
 let wins = 0;
 let losses = 0;
@@ -63,12 +62,11 @@ function logMessage(message) {
 }
 
 /**
- * Update the display at the top with the correct number of wins/losses/rounds
+ * Update the display at the top with the correct number of wins/losses
  */
 function updateDisplay() {
     winsText.textContent = wins;
     lossesText.textContent = losses;
-    roundsText.textContent = `${round}/${MAX_ROUNDS}`;
 }
 
 /**
@@ -110,7 +108,7 @@ function playRound(playerSelection, computerSelection) {
     }
     updateDisplay();
 
-    if (round == MAX_ROUNDS) {
+    if (wins == MAX_SCORE || losses == MAX_SCORE) {
         gameOver();
     }
 }
