@@ -74,9 +74,9 @@ function gameOver() {
     resultText.textContent = "It's a tie!";
   } else if (wins > losses) {
     resultText.textContent = "You won!";
-    resultText.style.color = "blue";
+    resultText.style.color = "green";
   } else {
-    resultText.textContent = "You lose!";
+    resultText.textContent = "You lost!";
     resultText.style.color = "red";
   }
   // Prevent player from continuing to play

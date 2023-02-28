@@ -40,20 +40,26 @@ img {
 
 body {
   margin: 2rem auto;
-  max-width: 300px;
+  padding: 1rem;
+  max-width: 330px;
+  line-height: 1.4;
   text-align: center;
   font-family: "Roboto", sans-serif;
   color: #222;
 }
 
+h1,
+h2 {
+  line-height: 0.8;
+}
+
 header {
   font-size: 2rem;
-  line-height: 1.9em;
   margin-bottom: 5rem;
 }
 
-h2 {
-  font-size: 2rem;
+.result {
+  font-size: 3rem;
 }
 
 .vertical-columns {
@@ -78,7 +84,7 @@ button {
   border: 1px solid black;
   background-color: #ddd;
   color: #555;
-  line-height: 2em;
+  margin-top: 1rem;
   height: 150px;
   text-align: left;
   overflow: auto;
@@ -86,7 +92,7 @@ button {
 
 .messages > * {
   border-bottom: 1px dotted black;
-  padding-left: 0.4rem;
+  padding: 0 0.4rem;
 }
 
 .messages > *:last-child {
