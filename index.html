@@ -8,28 +8,35 @@
   the elements created in it. One other option is moving the script to the
   end of the body-->
   <script defer src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
   <title>Rock Paper Scissors</title>
 </head>
 <body>
-  <h1>Rock Paper Scissors</h1>
+  <header>
+    <h1>Rock Paper Scissors</h1>
+  </header>
 
-  <h2 id="result"></h2>
-  <div>
-    <div>
-      <h2>Wins</h2>
-      <p id="wins"></p>
+  <main>
+    <h2 id="result" class="result"></h2>
+    <div class="vertical-columns">
+      <div>
+        <h2>Wins</h2>
+        <p id="wins"></p>
+      </div>
+      <div>
+        <h2>Losses</h2>
+        <p id="losses"></p>
+      </div>
     </div>
-    <div>
-      <h2>Losses</h2>
-      <p id="losses"></p>
+
+    <div class="buttons">
+      <button id="rock">Rock</button>
+      <button id="paper">Paper</button>
+      <button id="scissors">Scissors</button>
     </div>
-  </div>
 
-  <button id="rock">Rock</button>
-  <button id="paper">Paper</button>
-  <button id="scissors">Scissors</button>
-
-  <h2>Messages:</h2>
-  <div id="messages"></div>
+    <h2>Messages</h2>
+    <div id="messages" class="messages"></div>
+  </main>
 </body>
 </html>

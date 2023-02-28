@@ -8,7 +8,7 @@ const buttons = document.querySelectorAll("button")
  * Valid moves
  * @type {Array.<string>}
  */
-const MOVES = [ "rock", "paper", "scissors" ];
+const MOVES = ["rock", "paper", "scissors"];
 
 /**
  * Generates a random move
@@ -57,8 +57,11 @@ let losses = 0;
  */
 function logMessage(message) {
     let tag = document.createElement("p");
-    tag.textContent = message;
+    tag.innerHTML = message;
     messages.appendChild(tag);
+
+    // Keep the latest message always visible by scrolling to the bottom
+    messages.scrollTop = messages.scrollHeight;
 }
 
 /**
@@ -78,8 +81,10 @@ function gameOver() {
         resultText.textContent = "It's a tie!";
     } else if (wins > losses) {
         resultText.textContent = "You won!";
+        resultText.style.color = "blue";
     } else {
         resultText.textContent = "You lose!";
+        resultText.style.color = "red";
     }
     // Prevent player from continuing to play
     buttons.forEach(button => {
@@ -96,15 +101,13 @@ function playRound(playerSelection, computerSelection) {
     round++;
     const winner = getWinner(playerSelection, computerSelection);
     if (winner === 1) {
-        logMessage(`#${round} Computer used ${computerSelection}... You won!`);
+        logMessage(`<strong>#${round}</strong> Computer used ${computerSelection}... You won!`);
         wins++;
-    }
-    else if (winner === 0) {
-        logMessage(`#${round} Computer used ${computerSelection}... You lose!`);
+    } else if (winner === 0) {
+        logMessage(`<strong>#${round}</strong> Computer used ${computerSelection}... You lose!`);
         losses++;
-    }
-    else {
-        logMessage(`#${round} It's a tie!`);
+    } else {
+        logMessage(`<strong>#${round}</strong> It's a tie!`);
     }
     updateDisplay();
 
